@@ -10,6 +10,7 @@ namespace xNetStandard
         HEAD,
         DELETE,
         POST,
-        PUT
+        PUT,
+        OPTIONS
     }
 }

@@ -1020,6 +1020,7 @@ namespace xNetStandard
             // Если пришёл ответ без тела сообщения.
             if (ContentLength == 0 ||
                 Method == HttpMethod.HEAD ||
+                Method == HttpMethod.OPTIONS ||
                 StatusCode == HttpStatusCode.Continue ||
                 StatusCode == HttpStatusCode.NoContent ||
                 StatusCode == HttpStatusCode.NotModified)

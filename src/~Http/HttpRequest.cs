@@ -1455,6 +1455,35 @@ namespace xNetStandard
 
         #endregion
 
+        #region OPTIONS
+
+        /// <summary>
+        /// Отправляет OPTIONS-запрос HTTP-серверу.
+        /// </summary>
+        /// <param name="address">Адрес интернет-ресурса.</param>
+        /// <returns>Объект, предназначенный для загрузки ответа от HTTP-сервера.</returns>
+        /// <exception cref="System.ArgumentNullException">Значение параметра <paramref name="address"/> равно <see langword="null"/>.</exception>
+        /// <exception cref="System.ArgumentException">Значение параметра <paramref name="address"/> является пустой строкой.</exception>
+        /// <exception cref="xNetStandard.Net.HttpException">Ошибка при работе с HTTP-протоколом.</exception>
+        public HttpResponse Options(string address)
+        {
+            return Raw(HttpMethod.OPTIONS, address);
+        }
+
+        /// <summary>
+        /// Отправляет OPTIONS-запрос HTTP-серверу.
+        /// </summary>
+        /// <param name="address">Адрес интернет-ресурса.</param>
+        /// <returns>Объект, предназначенный для загрузки ответа от HTTP-сервера.</returns>
+        /// <exception cref="System.ArgumentNullException">Значение параметра <paramref name="address"/> равно <see langword="null"/>.</exception>
+        /// <exception cref="xNetStandard.Net.HttpException">Ошибка при работе с HTTP-протоколом.</exception>
+        public HttpResponse Options(Uri address)
+        {
+            return Raw(HttpMethod.OPTIONS, address);
+        }
+
+        #endregion
+
         #region Raw
 
         /// <summary>
