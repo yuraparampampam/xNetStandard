@@ -178,12 +178,12 @@ namespace xNetStandard
         // Заголовки, которые можно задать только с помощью специального свойства/метода.
         private static readonly List<string> _closedHeaders = new List<string>()
         {
-            "Accept-Encoding",
-            "Content-Length",
-            "Content-Type",
-            "Connection",
-            "Proxy-Connection",
-            "Host"
+            "accept-encoding",
+            "content-length",
+            "content-type",
+            "connection",
+            "proxy-connection",
+            "host"
         };
 
         #endregion
@@ -592,11 +592,11 @@ namespace xNetStandard
         {
             get
             {
-                return this["User-Agent"];
+                return this["user-agent"];
             }
             set
             {
-                this["User-Agent"] = value;
+                this["user-agent"] = value;
             }
         }
 
@@ -608,11 +608,11 @@ namespace xNetStandard
         {
             get
             {
-                return this["Referer"];
+                return this["referer"];
             }
             set
             {
-                this["Referer"] = value;
+                this["referer"] = value;
             }
         }
 
@@ -624,11 +624,11 @@ namespace xNetStandard
         {
             get
             {
-                return this["Authorization"];
+                return this["authorization"];
             }
             set
             {
-                this["Authorization"] = value;
+                this["authorization"] = value;
             }
         }
 
@@ -2039,7 +2039,7 @@ namespace xNetStandard
 
             if (_temporaryHeaders == null)
             {
-                _temporaryHeaders = new Dictionary<string, string>();
+                _temporaryHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             }
 
             _temporaryHeaders[name] = value;
@@ -2699,8 +2699,8 @@ namespace xNetStandard
             if (_temporaryHeaders != null && _temporaryHeaders.Count > 0)
                 MergeHeaders(headers, _temporaryHeaders);
 
-            if (Cookies != null && Cookies.Count != 0 && !headers.ContainsKey("Cookie"))
-                headers["Cookie"] = Cookies.ToString();
+            if (Cookies != null && Cookies.Count != 0 && !headers.ContainsKey("cookie"))
+                headers["cookie"] = Cookies.ToString();
 
             return ToHeadersString(headers);
         }
@@ -2712,9 +2712,9 @@ namespace xNetStandard
             #region Host
 
             if (Address.IsDefaultPort)
-                headers["Host"] = Address.Host;
+                headers["host"] = Address.Host;
             else
-                headers["Host"] = string.Format("{0}:{1}", Address.Host, Address.Port);
+                headers["host"] = string.Format("{0}:{1}", Address.Host, Address.Port);
 
             #endregion
 
@@ -2734,27 +2734,27 @@ namespace xNetStandard
             if (httpProxy != null)
             {
                 if (KeepAlive)
-                    headers["Proxy-Connection"] = "keep-alive";
+                    headers["proxy-connection"] = "keep-alive";
                 else
-                    headers["Proxy-Connection"] = "close";
+                    headers["proxy-connection"] = "close";
 
                 if (!string.IsNullOrEmpty(httpProxy.Username) ||
                     !string.IsNullOrEmpty(httpProxy.Password))
                 {
-                    headers["Proxy-Authorization"] = GetProxyAuthorizationHeader(httpProxy);
+                    headers["proxy-authorization"] = GetProxyAuthorizationHeader(httpProxy);
                 }
             }
             else
             {
                 if (KeepAlive)
-                    headers["Connection"] = "keep-alive";
+                    headers["connection"] = "keep-alive";
                 else
-                    headers["Connection"] = "close";
+                    headers["connection"] = "close";
             }
 
             if (!string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Password))
             {
-                headers["Authorization"] = GetAuthorizationHeader();
+                headers["authorization"] = GetAuthorizationHeader();
             }
 
             #endregion
@@ -2762,24 +2762,24 @@ namespace xNetStandard
             #region Content
 
             if (EnableEncodingContent)
-                headers["Accept-Encoding"] = "gzip,deflate";
+                headers["accept-encoding"] = "gzip,deflate";
                 //TODO looks like fixed but in case of error with GZipStream use deflate encoding
                 //headers["Accept-Encoding"] = "deflate";
 
             if (Culture != null)
-                headers["Accept-Language"] = GetLanguageHeader();
+                headers["accept-language"] = GetLanguageHeader();
 
             if (CharacterSet != null)
-                headers["Accept-Charset"] = GetCharsetHeader();
+                headers["accept-charset"] = GetCharsetHeader();
 
             if (CanContainsRequestBody(method))
             {
                 if (contentLength > 0)
                 {
-                    headers["Content-Type"] = contentType;
+                    headers["content-type"] = contentType;
                 }
 
-                headers["Content-Length"] = contentLength.ToString();
+                headers["content-length"] = contentLength.ToString();
             }
 
             #endregion

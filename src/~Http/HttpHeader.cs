@@ -49,6 +49,7 @@ namespace xNetStandard
         Refresh,
         RetryAfter,
         Server,
-        TransferEncoding
+        TransferEncoding,
+        Origin
     }
 }

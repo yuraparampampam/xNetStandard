@@ -11,7 +11,7 @@
     <RepositoryUrl>https://github.com/yuraparampampam/xNetStandard</RepositoryUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.1.1</Version>
+    <Version>1.1.4</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Resources.Designer.cs">
